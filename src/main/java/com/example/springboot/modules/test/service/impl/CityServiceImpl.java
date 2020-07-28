@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Date;
@@ -42,6 +43,22 @@ public class CityServiceImpl implements CityService {
         city.setDateCreated(new Date());
         cityDao.insertCity(city);
         return new Result<City>(Result.ResultStatus.SUCCESS.status,"Insert success",city);
+    }
+
+    @Override
+//    noRollbackFor 表示遇到某种异常不回滚   propagation 配置传播方式
+//    @Transactional(noRollbackFor = ,propagation = )
+    @Transactional
+    public Result<City> updateCity(City city) {
+        cityDao.updateCity(city);
+        return new Result<City>(Result.ResultStatus.SUCCESS.status,"update success",city);
+    }
+
+    @Override
+    public Result<Object> deleteCity(int id) {
+        cityDao.deleteCity(id);
+        return new Result<Object>(Result.ResultStatus.SUCCESS.status,"delete success");
+
     }
 
 }

@@ -53,4 +53,20 @@ public class CityController {
     public Result<City> insertCity(@RequestBody City city){
         return cityService.insertCity(city);
     }
+
+    /*
+     * 127.0.0.1:8086/api/cityUpdate
+     * */
+    @PutMapping(value="/cityUpdate",consumes = "application/x-www-form-urlencoded")
+    public Result<City> updateCity(@ModelAttribute City city){
+        return cityService.updateCity(city);
+    }
+
+    /*
+     * 127.0.0.1:8086/api/cityDelete/7
+     * */
+    @DeleteMapping(value="/cityDelete/{id}")
+    public Result<Object> deleteCity(@PathVariable int id){
+        return cityService.deleteCity(id);
+    }
 }

@@ -15,4 +15,8 @@ public interface CityService {
     PageInfo<City> getCitiesByPage(int currentPage, int pageSize, int id);
 
     Result<City> insertCity(City city);
+
+    Result<City> updateCity(City city);
+
+    Result<Object> deleteCity(int id);
 }

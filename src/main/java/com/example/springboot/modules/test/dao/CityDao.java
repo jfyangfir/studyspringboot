@@ -37,4 +37,10 @@ public interface CityDao {
         @Options(useGeneratedKeys = true,keyColumn = "id",keyProperty = "id")
         void insertCity(City city);
 
+        @Update("update city set person = #{person} where id = #{id}")
+        void updateCity(City city);
+
+        @Delete("delete from city where id=#{id}")
+        void deleteCity(int id);
+
 }
