@@ -1,5 +1,6 @@
 package com.example.springboot.modules.test.service;
 
+import com.example.springboot.modules.common.vo.Result;
 import com.example.springboot.modules.test.entity.City;
 import com.github.pagehelper.PageInfo;
 
@@ -12,4 +13,6 @@ public interface CityService {
     City getCityByCityName(String cityName);
 
     PageInfo<City> getCitiesByPage(int currentPage, int pageSize, int id);
+
+    Result<City> insertCity(City city);
 }
