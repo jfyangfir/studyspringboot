@@ -1,8 +1,12 @@
 package com.example.springboot.modules.test.controller;
 
-//https
-//SSL：自己生成一个CA证书命令：keytool -genkey -alias tomcat -keyalg RSA
-//@Controller
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+//https SSL：自己生成一个CA证书命令：keytool -genkey -alias tomcat -keyalg RSA
+@Controller
+@RequestMapping("/test")
 public class TestController {
 
 //    @Value("${server.port}")
@@ -17,7 +21,12 @@ public class TestController {
 //    private String random;
 
 //    @Autowired
-//    private applicationTest applicationTest;
+//    private com.example.springboot.modules.test.vo.applicationTest applicationTest;
+
+    @RequestMapping("/index")
+    public String indexPage(){
+        return "index";
+    }
 
 //    @RequestMapping("/test/config")
 //    @ResponseBody
@@ -28,18 +37,18 @@ public class TestController {
 //           .append(age).append("---")
 //           .append(desc).append("---")
 //           .append(random).append("---").append("<br>");
-
+//
 //        sb.append(applicationTest.getName1()).append("---")
 //           .append(applicationTest.getAge1()).append("---")
 //           .append(applicationTest.getDesc1()).append("---")
 //           .append(applicationTest.getRandom1()).append("---").append("<br>");
-
+//
 //        return sb.toString();
 //    }
-//
-//    @RequestMapping("/test/desc")
-//    @ResponseBody
-//    public String testDesc(){
-//        return "it is test module desc";
-//    }
+
+    @RequestMapping("/test/desc")
+    @ResponseBody
+    public String testDesc(){
+        return "it is test module desc";
+    }
 }

@@ -69,4 +69,12 @@ public class CityController {
     public Result<Object> deleteCity(@PathVariable int id){
         return cityService.deleteCity(id);
     }
+
+    /*
+     * 127.0.0.1:8086/api/redis/cities/4
+     * */
+    @RequestMapping("/redis/cities/{id}")
+    public Object migrateCitiesById(@PathVariable int id){
+        return cityService.migrateCitiesById(id);
+    }
 }
