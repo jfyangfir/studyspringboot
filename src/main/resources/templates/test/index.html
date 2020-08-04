@@ -1,1 +1,43 @@
-hello big face！
+<section>
+    hello big face！<br>
+<!--    <a th:href="@{http://www.baidu.com}" target="_blank"></a>-->
+<!--    <a th:href="${baiduUrl}" target="_blank"></a>-->
+<!--    封装动态url、url查询参数-->
+    <a th:href="@{'/test/index'+${city.id}}" th:text="${city.cityName}"></a>
+    <a th:href="@{/test/index(pageSize=${city.id},currentPage='1')}" th:text="${city.cityName}"></a>
+<!--    <img th:src="">-->
+    <br>
+    ===============================================================
+    <div th:object="${city}">
+    <p th:text="*{id}"></p>
+    <p th:text="*{cityName}"></p>
+    <p th:text="${city.person}"></p>
+    </div>
+    <p>==============================================================</p>
+
+    <table>
+        <th>id</th><th>cityName</th><th>person</th><th>countryId</th>
+        <tr th:each="city:${cities}">
+            <td th:text="${city.id}"></td>
+            <td th:text="${city.cityName}"></td>
+            <td th:text="${city.person}"></td>
+            <td th:text="${city.countryId}"></td>
+        </tr>
+    </table>
+
+    <select>
+        <option th:each="city,cityStatus:${cities}"
+                th:value="${city.id}" th:text="${city.cityName}"></option>
+    </select>
+    <br>
+    ============================================================
+<!--    我们可以指定是GET还是POST请求,这里需要注意的是有的浏览器并不支持PUT请求, SpringMVC为我们提供了一种解决方案,添加hidden指定method-->
+    <form th:action= "${updateCityUrl}" method="post" th:object="${city}">
+        <input type="hidden" name="_method" value="PUT">
+        Id:                   <input th:field="*{id}" readonly/>
+        City Name:            <input th:field="*{cityName}" readonly/>
+        Person:               <input th:field="*{person}"/>
+        <button type="submit">Submit Info</button>
+    </form>
+
+</section>

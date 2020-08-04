@@ -33,7 +33,7 @@ public interface CityDao {
 
         @Insert("insert into city (cityName,person,countryId,dateCreated)"
         + "values(#{cityName},#{person},#{countryId},#{dateCreated})")
-//        绑定id作一个一对一的city映射，若未绑定city对象中id则为null
+//        绑定id作一对一的city映射，若未绑定city对象中id则为null
         @Options(useGeneratedKeys = true,keyColumn = "id",keyProperty = "id")
         void insertCity(City city);
 
@@ -42,5 +42,8 @@ public interface CityDao {
 
         @Delete("delete from city where id=#{id}")
         void deleteCity(int id);
+
+        @Select("select * from city where countryId=#{countryId}")
+        List<City> getCitiesByCountryId(int countryId);
 
 }

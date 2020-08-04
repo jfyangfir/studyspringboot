@@ -1,8 +1,16 @@
 package com.example.springboot.modules.test.controller;
 
+import com.example.springboot.modules.test.entity.City;
+import com.example.springboot.modules.test.service.CityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 //https SSL：自己生成一个CA证书命令：keytool -genkey -alias tomcat -keyalg RSA
 @Controller
@@ -23,8 +31,20 @@ public class TestController {
 //    @Autowired
 //    private com.example.springboot.modules.test.vo.applicationTest applicationTest;
 
+    @Autowired
+    private CityService cityService;
+
+    /*
+     * 127.0.0.1:8086/test/index
+     * */
     @RequestMapping("/index")
-    public String indexPage(){
+    public String indexPage(ModelMap modelMap){
+        int countryId=3;
+        List<City> cities=cityService.getCitiesByCountryId(countryId);
+        modelMap.addAttribute("template","test/index");
+        modelMap.addAttribute("city",cities.get(0));
+        modelMap.addAttribute("cities",cities);
+        modelMap.addAttribute("updateCityUrl","/api/cityUpdate");
         return "index";
     }
 
@@ -46,9 +66,13 @@ public class TestController {
 //        return sb.toString();
 //    }
 
-    @RequestMapping("/test/desc")
+/*
+ * 127.0.0.1:8086/test/desc?key=fuck
+ * */
+    @RequestMapping("/desc")
     @ResponseBody
-    public String testDesc(){
-        return "it is test module desc";
+    public String testDesc(HttpServletRequest request, @RequestParam String key){
+        String keyTwo=request.getParameter("key");
+        return "it is test module desc"+"---"+key+"======"+keyTwo;
     }
 }

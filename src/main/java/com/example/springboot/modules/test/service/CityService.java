@@ -21,4 +21,6 @@ public interface CityService {
     Result<Object> deleteCity(int id);
 
     Object migrateCitiesById(int id);
+
+    List<City> getCitiesByCountryId(int countryId);
 }

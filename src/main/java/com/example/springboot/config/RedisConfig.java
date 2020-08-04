@@ -22,11 +22,11 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
-
+//@Configuration  指示一个类声明一个或多个@Bean方法，并且可以由Spring容器处理，以便在运行时为这些bean生成BeanDefinition和服务请求
 @Configuration
 @EnableCaching //启用缓存，使用Lettuce,自动注入配置的方式
+//@AutoConfigureAfter  在加载配置的类之后再加载当前类
 @AutoConfigureAfter(RedisAutoConfiguration. class)
 public class RedisConfig extends CachingConfigurerSupport {
         /**
@@ -76,17 +76,14 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     @Override
     public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder sb = new StringBuilder();
-                sb. append(target .getClass(). getName());
-                sb. append (method. getName());
-                Arrays.asList(params).stream().forEach(item -> {
-                    sb.append(item.toString());
-                });
-                return sb.toString();
-            }
+        return (target, method, params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName());
+            sb.append (method.getName());
+            Arrays.asList(params).stream().forEach(item -> {
+                sb.append(item.toString());
+            });
+            return sb.toString();
         };
     }
     }

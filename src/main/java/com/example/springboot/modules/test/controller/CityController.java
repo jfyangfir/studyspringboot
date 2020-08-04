@@ -77,4 +77,12 @@ public class CityController {
     public Object migrateCitiesById(@PathVariable int id){
         return cityService.migrateCitiesById(id);
     }
+
+    /*
+     * 127.0.0.1:8086/api/citiesCountryId/3
+     * */
+    @RequestMapping("/citiesCountryId/{countryId}")
+    public List<City> getCitiesByCountryId(@PathVariable int countryId){
+        return cityService.getCitiesByCountryId(countryId);
+    }
 }

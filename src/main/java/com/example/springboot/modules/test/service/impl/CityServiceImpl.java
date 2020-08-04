@@ -86,4 +86,9 @@ public class CityServiceImpl implements CityService {
         return redisUtils.get("cities");
     }
 
+    public List<City> getCitiesByCountryId(int countryId){
+        return Optional.ofNullable(cityDao.getCitiesByCountryId(countryId))
+                .orElse(Collections.emptyList());
+    }
+
 }
