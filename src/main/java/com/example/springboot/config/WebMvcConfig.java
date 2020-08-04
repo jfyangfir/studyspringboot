@@ -47,7 +47,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return registrationBean;
     }
 
-    //将拦截器注册进去
+//    1.实现WebMvcConfigurer接口； 2.重写addInterceptors()方法；3.注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(urlInterceptor).addPathPatterns("/**");

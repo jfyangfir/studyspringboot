@@ -34,6 +34,7 @@ public class TestController {
     @Autowired
     private CityService cityService;
 
+
     /*
      * 127.0.0.1:8086/test/index
      * */
@@ -47,6 +48,8 @@ public class TestController {
         modelMap.addAttribute("updateCityUrl","/api/cityUpdate");
         return "index";
     }
+
+
 
 //    @RequestMapping("/test/config")
 //    @ResponseBody
@@ -65,6 +68,8 @@ public class TestController {
 //
 //        return sb.toString();
 //    }
+
+
 
 /*
  * 127.0.0.1:8086/test/desc?key=fuck
