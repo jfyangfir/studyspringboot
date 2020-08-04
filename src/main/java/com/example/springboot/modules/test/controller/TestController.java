@@ -41,7 +41,7 @@ public class TestController {
     public String indexPage(ModelMap modelMap){
         int countryId=3;
         List<City> cities=cityService.getCitiesByCountryId(countryId);
-        modelMap.addAttribute("template","test/index");
+//        modelMap.addAttribute("template","test/index");
         modelMap.addAttribute("city",cities.get(0));
         modelMap.addAttribute("cities",cities);
         modelMap.addAttribute("updateCityUrl","/api/cityUpdate");
