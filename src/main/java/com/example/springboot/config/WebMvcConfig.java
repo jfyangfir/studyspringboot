@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+//@Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，用于构建bean定义，初始化Spring容器
 @Configuration
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -21,6 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private UrlInterceptor urlInterceptor;
 
+//    @Bean 表明这个方法产生一个Bean对象，需要交给Spring进行管理
 //    @Bean
 //    public Connector connector(){
 //        Connector connector=new Connector();
@@ -36,10 +37,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        return factory;
 //    }
 
-//■过滤器vs拦截器
-//■拦截器只能对Action (也就是Controller )请求起作用,而过滤器则可以对几乎所有的请求起作用;
-//■拦截器可以获取IOC容器中的各个Bean ,而过滤器就不行;
-//■拦截器功能更强大些, Filter能做的事情,它都能做,而且可以在请求前,请求后执行,比较灵活;
+
+/**
+  * 过滤器vs拦截器
+  * 拦截器只能对 Action (也就是 Controller )请求起作用,而过滤器则可以对几乎所有的请求起作用;
+  * 拦截器可以获取 IOC 容器中的各个 Bean ,而过滤器就不行;
+  * 拦截器功能更强大些,过滤器能做的事情,它都能做,而且可以在请求前,请求后执行,比较灵活;
+ */
+
+//    注册过滤器
     @Bean
     public FilterRegistrationBean<ParameterFilter> filter(){
         FilterRegistrationBean<ParameterFilter> registrationBean=new FilterRegistrationBean();

@@ -1,7 +1,26 @@
 <section>
     hello big face！<br>
+
+    <h1>file upload</h1>
+    <p th:text="${message}"></p>
+
+    <p>上传文件，使用multipart/form-data类型</p>
+    <form action="/test/file" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">上传</button>
+    </form>
+    <br>
+
+    <form action="/test/files" method="post" enctype="multipart/form-data">
+    <input type="file" name="files">
+    <input type="file" name="files">
+    <button type="submit">上传</button>
+    </form>
+    <p>=============================================================</p>
+
 <!--    <a th:href="@{http://www.baidu.com}" target="_blank"></a>-->
 <!--    <a th:href="${baiduUrl}" target="_blank"></a>-->
+
 <!--    封装动态url、url查询参数-->
     <a th:href="@{'/test/index'+${city.id}}" th:text="${city.cityName}"></a>
     <a th:href="@{/test/index(pageSize=${city.id},currentPage='1')}" th:text="${city.cityName}"></a>

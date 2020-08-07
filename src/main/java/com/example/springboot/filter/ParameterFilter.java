@@ -12,7 +12,7 @@ import java.io.IOException;
 
 //   /** ----代表所有，匹配多级目录  表示所有的方法都会进入ParameterFilter过滤器这个类
 //@WebFilter 用于将一个类声明为过滤器，该注解将会在部署时被容器处理，容器将根据具体的属性配置将相应的类部署为过滤器。
-//           该注解具有下表给出的一些常用属性 (value、urlPatterns、servletNames 三者必需至少包含一个，且 value 和 urlPatterns 不能共存，如果同时指定，通常忽略 value 的取值 )
+//           (value、urlPatterns、servletNames 三者必需至少包含一个，且 value 和 urlPatterns 不能共存，如果同时指定，通常忽略 value 的取值)
 @WebFilter(filterName = "ParameterFilter",urlPatterns = "/**")
 public class ParameterFilter implements Filter {
 
@@ -26,9 +26,11 @@ public class ParameterFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         LOGGER.debug("ParameterFilter doFilter.--------------------");
         HttpServletRequest httpServletRequest= (HttpServletRequest) servletRequest;
-//        走不通
+////        走不通
 //        Map<String,String[]> maps=httpServletRequest.getParameterMap();
         HttpServletRequestWrapper wrapper = new HttpServletRequestWrapper(httpServletRequest){
+
+            //替换 HttpServletRequest request 里的参数
             @Override
             public String getParameter(String name) {
                 String value=httpServletRequest.getParameter(name);
@@ -38,6 +40,7 @@ public class ParameterFilter implements Filter {
                 return super.getParameter(name);
             }
 
+            //替换 @RequestParam String key 里的参数
             @Override
             public String[] getParameterValues(String name) {
                 String[] values=httpServletRequest.getParameterValues(name);
@@ -52,7 +55,7 @@ public class ParameterFilter implements Filter {
         };
 //        过滤器的作用之一就是在用户的请求到达servlet之前，拦截下来做预处理，处理之后便执行chain.doFilter(request, response)这个方法，
 //        如果还有别的过滤器，那么将处理好的请求传给下个过滤器，依此类推，当所有的过滤器都把这个请求处理好了之后，再将处理完的请求发给servlet；
-//        如果就这一个过滤器，那么就将处理好的请求直接发给servlet。
+//        如果就这一个过滤器，那么就将处理好的请求直接发给servlet
         filterChain.doFilter(wrapper,servletResponse);
     }
 

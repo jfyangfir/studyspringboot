@@ -10,20 +10,20 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component //把普通pojo实例化到spring容器中
+@Component //把普通java对象实例化到spring容器中
 public class UrlInterceptor implements HandlerInterceptor {
 
     private final static Logger LOGGER= LoggerFactory.getLogger(UrlInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        LOGGER.debug("Pre controller=======================");
+        LOGGER.debug("Interceptor PreHandle()=======================");
         return HandlerInterceptor.super.preHandle(request,response,handler);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        LOGGER.debug("Post controller=======================");
+        LOGGER.debug("Interceptor PostHandle()=======================");
 
         if(modelAndView==null || modelAndView.getViewName().startsWith("redirect")){return;}
 
@@ -42,6 +42,6 @@ public class UrlInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        LOGGER.debug("After controller=======================");
+        LOGGER.debug("Interceptor AfterCompletion()=======================");
     }
 }
