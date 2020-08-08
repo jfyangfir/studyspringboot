@@ -4,7 +4,7 @@ public class Result <T>{
 
 //    private final static Integer SUCCESS=200;
 //    private final static Integer Fail=500;
-    //status 状态
+//    status 状态
     private int status;
     private String message;
     private T object;

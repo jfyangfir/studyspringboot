@@ -23,11 +23,9 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.Arrays;
-//@Configuration  指示一个类声明一个或多个@Bean方法，并且可以由Spring容器处理，以便在运行时为这些bean生成BeanDefinition和服务请求
-@Configuration
+@Configuration //指示一个类声明一个或多个@Bean方法，并且可以由Spring容器处理，以便在运行时为这些bean生成BeanDefinition和服务请求
 @EnableCaching //启用缓存，使用Lettuce,自动注入配置的方式
-//@AutoConfigureAfter  在加载配置的类之后再加载当前类
-@AutoConfigureAfter(RedisAutoConfiguration. class)
+@AutoConfigureAfter(RedisAutoConfiguration. class) //在加载配置的类之后再加载当前类
 public class RedisConfig extends CachingConfigurerSupport {
         /**
          * config RedisTemplate<object, Object>

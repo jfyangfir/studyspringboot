@@ -50,22 +50,20 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-/*    传播机制
-       * 保证同一个事务中
-            * TransactionDefinition.PROPAGATION _REQUIRED ---如果当前存在事务,则加入该事务.
-                如果当前没有事务,则创建一个新的事务,这是默认值;
-            * TransactionDefinition.SUPPORTS ----支持当前事务,如果不存在,就不使用事务;
-            * TransactionDefinition.MANDATORY ----支持当前事务,如果不存在,抛出异常;
-       * 保证没有在同一个事务中
-            * TransactionDefinition.REQUIRES_ NEW ---如果有事务存在,挂起当前事务,创建一个新的事务.
-                新的执行完毕,继续执行老的事务;
-            * TransactionDefinition.NOT_ SUPPORTED ---以非事务方式运行,如果有事务存在,挂起当前事务;
-            * TransactionDefinition.NEVER ---以非事务方式运行,如果有事务存在,抛出异常;
-            * TransactionDefinition.PROPAGATION. NESTED ---如果当前事务存在,则嵌套事务执行;
- */
+    /** 传播机制
+      * 保证同一个事务中
+      * TransactionDefinition.PROPAGATION _REQUIRED ---如果当前存在事务,则加入该事务.
+      *   如果当前没有事务,则创建一个新的事务,这是默认值;
+      *   TransactionDefinition.SUPPORTS ----支持当前事务,如果不存在,就不使用事务;
+      *   TransactionDefinition.MANDATORY ----支持当前事务,如果不存在,抛出异常;
+      * 保证没有在同一个事务中
+      *   TransactionDefinition.REQUIRES_ NEW ---如果有事务存在,挂起当前事务,创建一个新的事务,新的执行完毕,继续执行老的事务;
+      *   TransactionDefinition.NOT_ SUPPORTED ---以非事务方式运行,如果有事务存在,挂起当前事务;
+      *   TransactionDefinition.NEVER ---以非事务方式运行,如果有事务存在,抛出异常;
+      *   TransactionDefinition.PROPAGATION. NESTED ---如果当前事务存在,则嵌套事务执行;
+      */
 
-    //    @Transactional(noRollbackFor = ,propagation = )
-    //    noRollbackFor 表示遇到某种异常不回滚   propagation 配置传播方式
+//    @Transactional(noRollbackFor = ,propagation = )  noRollbackFor 表示遇到某种异常不回滚   propagation 配置传播方式
     @Transactional
     public Result<City> updateCity(City city) {
         cityDao.updateCity(city);

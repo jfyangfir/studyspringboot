@@ -17,7 +17,7 @@ public interface CityDao {
         * 2.结果集共享，设置 id 属性，调用时使用 @ResultMap(value="countryResult")
         */
 
-        //组合查询（联表查询）
+//        组合查询（联表查询）
         @Select("select * from city where id=#{id}")
         @Results (id = "cityResult",value = {
                   @Result(column = "countryId",property = "countryId"),

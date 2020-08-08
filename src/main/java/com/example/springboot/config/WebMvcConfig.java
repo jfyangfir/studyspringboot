@@ -9,9 +9,10 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//@Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，用于构建bean定义，初始化Spring容器
-@Configuration
+
+@Configuration //用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，用于构建bean定义，初始化Spring容器
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -21,8 +22,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private UrlInterceptor urlInterceptor;
 
-//    @Bean 表明这个方法产生一个Bean对象，需要交给Spring进行管理
-//    @Bean
+    @Autowired
+    private ResourceConfigBean resourceConfigBean;
+
+//    @Bean //表明这个方法产生一个Bean对象，需要交给Spring进行管理
 //    public Connector connector(){
 //        Connector connector=new Connector();
 //        connector.setScheme("http");
@@ -43,7 +46,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
   * 拦截器只能对 Action (也就是 Controller )请求起作用,而过滤器则可以对几乎所有的请求起作用;
   * 拦截器可以获取 IOC 容器中的各个 Bean ,而过滤器就不行;
   * 拦截器功能更强大些,过滤器能做的事情,它都能做,而且可以在请求前,请求后执行,比较灵活;
- */
+  */
 
 //    注册过滤器
     @Bean
@@ -53,9 +56,24 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return registrationBean;
     }
 
-//    1.实现WebMvcConfigurer接口； 2.重写addInterceptors()方法；3.注册拦截器
+//    1.实现WebMvcConfigurer接口；2.重写addInterceptors()方法；3.注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(urlInterceptor).addPathPatterns("/**");
+    }
+
+//    加入静态资源文件夹
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        获取系统属性
+        String systemName=System.getProperty("os.name");
+        if(systemName.toLowerCase().startsWith("win")){
+            registry.addResourceHandler(resourceConfigBean.getResourcePath())
+                    .addResourceLocations("file:"+resourceConfigBean.getLocalPathForWindows());
+        }else {
+            registry.addResourceHandler(resourceConfigBean.getResourcePath())
+                    .addResourceLocations("file:"+resourceConfigBean.getLocalPathForLinux());
+        }
+
     }
 }

@@ -29,11 +29,12 @@ public class CityController {
      * 127.0.0.1:8086/api/city?cityName=
      * */
     @RequestMapping("/city")
-//    @PathVariable   找路径上面对应的参数
-//    @RequestParam   将请求参数绑定到你控制器的方法参数上
-//    @RequestBody    接受 jason 数据
-//    @PostMapping    指定 post 请求
-//    consumes        进入控制器的数据类型
+  /** @PathVariable   找路径上面对应的参数
+    * @RequestParam   将请求参数绑定到你控制器的方法参数上
+    * @RequestBody    接受 jason 数据
+    * @PostMapping    指定 post 请求
+    * consumes        进入控制器的数据类型
+    */
     public City getCityByCityName(@RequestParam String cityName){
           return cityService.getCityByCityName(cityName);
     }

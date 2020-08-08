@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-//https SSL：自己生成一个CA证书命令：keytool -genkey -alias tomcat -keyalg RSA
+// https SSL：自己生成一个CA证书命令：keytool -genkey -alias tomcat -keyalg RSA
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -39,6 +39,7 @@ public class TestController {
     @Autowired
     private CityService cityService;
 
+//    上传多个文件
     @PostMapping(value = "/files",consumes = "multipart/form-data")
     public String uploadFiles(MultipartFile[] files,RedirectAttributes redirectAttributes){
         boolean isEmpty=true;
@@ -66,6 +67,7 @@ public class TestController {
         return "redirect:/test/index";
     }
 
+//    上传单个文件
     @PostMapping(value = "/file",consumes = "multipart/form-data")
     public String uploadFile(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes){
 
@@ -77,7 +79,8 @@ public class TestController {
         }
 
         try {
-            String destFilePath="D:\\upload\\"+file.getOriginalFilename();
+            String resourcePath="/upload/"+file.getOriginalFilename();
+            String destFilePath="D:"+resourcePath;
             File destFile=new File(destFilePath);
             file.transferTo(destFile);
         } catch (IOException e) {
@@ -124,11 +127,12 @@ public class TestController {
 //        return sb.toString();
 //    }
 
-//        1.项目启动时，ParameterFilter init.;
-//        2.执行控制器代码后，ParameterFilter doFilter.==>Interceptor PreHandle()==>Around Controller==>
-//                           Before Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion();
-//        3.filter 里的 destroy 方法在容器移除 servlet 时执行，同样只执行一次。这个方法会在所有的线程的 service() 方法执行完成或者超时后执行，调用这个方法后，容器不再把请求发送给这个servlet。
-//          这个方法给servlet释放占用的资源的机会，通常用来执行一些清理任务
+    /** 1.项目启动时，ParameterFilter init.;
+      * 2.执行控制器代码后，ParameterFilter doFilter.==>Interceptor PreHandle()==>Around Controller==>
+      *   Before Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion();
+      * 3.filter 里的 destroy 方法在容器移除 servlet 时执行，同样只执行一次。这个方法会在所有的线程的 service() 方法执行完成或者超时后执行，
+      *   调用这个方法后，容器不再把请求发送给这个servlet。这个方法给servlet释放占用的资源的机会，通常用来执行一些清理任务
+      */
 
 /*
  * 127.0.0.1:8086/test/desc?key=fuck
