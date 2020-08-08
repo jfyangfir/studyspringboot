@@ -1,10 +1,16 @@
 package com.example.springboot.modules.test.controller;
 
+import com.example.springboot.config.ResourceConfigBean;
 import com.example.springboot.modules.test.entity.City;
 import com.example.springboot.modules.test.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -38,6 +45,28 @@ public class TestController {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private ResourceConfigBean resourceConfigBean;
+
+    @RequestMapping("/download")
+    @ResponseBody //返回一个对象而不是一个页面用此注解
+    public ResponseEntity<Resource> download(@RequestParam String fileName){
+
+        try {
+            String resourcePath=resourceConfigBean.getResourcePath()+fileName;
+            Resource resource=new UrlResource(ResourceUtils.getURL(resourcePath));
+            //CONTENT_DISPOSITION 设置下载文件的内容描述，可省略
+            return ResponseEntity.ok()
+                            .header(HttpHeaders.CONTENT_TYPE,"application/octet-stream")
+                            .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=%s",fileName))
+                            .body(resource);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 //    上传多个文件
     @PostMapping(value = "/files",consumes = "multipart/form-data")
@@ -78,10 +107,9 @@ public class TestController {
             return "redirect:/test/index";
         }
 
+        String resourcePath=resourceConfigBean.getResourcePath()+file.getOriginalFilename();
         try {
-            String resourcePath="/upload/"+file.getOriginalFilename();
-            String destFilePath="D:"+resourcePath;
-            File destFile=new File(destFilePath);
+            File destFile=new File(ResourceUtils.getURL(resourcePath).getPath());
             file.transferTo(destFile);
         } catch (IOException e) {
             e.printStackTrace();

@@ -68,10 +68,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        获取系统属性
         String systemName=System.getProperty("os.name");
         if(systemName.toLowerCase().startsWith("win")){
-            registry.addResourceHandler(resourceConfigBean.getResourcePath())
+            registry.addResourceHandler(resourceConfigBean.getResourcePathPattern())
                     .addResourceLocations("file:"+resourceConfigBean.getLocalPathForWindows());
         }else {
-            registry.addResourceHandler(resourceConfigBean.getResourcePath())
+            registry.addResourceHandler(resourceConfigBean.getResourcePathPattern())
                     .addResourceLocations("file:"+resourceConfigBean.getLocalPathForLinux());
         }
 
