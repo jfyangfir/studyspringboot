@@ -3,32 +3,117 @@
         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <!--        txmlns:shiro= "http://www.pollix.at/thymeleaf/shiro"-->
       <head>
-        <meta http-equiv="Content-Type" content= "text/html;charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
         <TITLE>SpringDemo</TITLE>
-        <META name="description" content="THORNBIRD.COM"/>
+
         <!--引入css -->
         <link th:href="@{http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet"/>
 <!--        <link th:href="${'/css/sbDemo.css'}" rel="stylesheet"/>-->
 
-        <!--引入is -->
-        <script th:src= "@{http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js}"></script>
-        <script th:src= "@{http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js}"></script>
+        <!--引入bootstrap-->
+        <link th:href="${'/vendors/bootstrap/dist/css/bootstrap.min.css'}" rel="stylesheet"/>
+        <!--Font Awesome -->
+        <link th:href="${'/vendors/font-awesome/css/font-awesome.min.css'}" rel="stylesheet"/>
+        <!--Custom Theme Style -->
+        <link th:href="${'/build/css/custom.min.css'}" rel="stylesheet">
+        <!-- iCheck -->
+        <link th:href="${'/vendors/iCheck/skins/flat/green.css'}" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link th:href="${'/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'}" rel="stylesheet">
+        <!-- JQVMap -->
+        <link th:href="${'/vendors/jqvmap/dist/jqvmap.min.css'}" rel="stylesheet">
+        <!-- bootstrap-daterangepicker -->
+        <link th:href="${'/vendors/bootstrap-daterangepicker/daterangepicker.css'}" rel="stylesheet">
+
+
+        <!--引入js -->
+<!--        <script th:src= "@{http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js}"></script>-->
+<!--        <script th:src= "@{http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js}"></script>-->
 <!--        <script th:src= "${'/js/sbDemo.js'}" type="text/javascript"></script>-->
+
+        <!-- jQuery -->
+        <script th:src= "${'/vendors/jquery/dist/jquery.min.js'}"></script>
+        <!-- Bootstrap -->
+        <script th:src= "${'/vendors/bootstrap/dist/js/bootstrap.bundle.min.js'}"></script>
+        <!-- NProgress -->
+        <script th:src= "${'/vendors/nprogress/nprogress.css'}"></script>
+        <!-- FastClick -->
+        <script th:src= "${'/vendors/fastclick/lib/fastclick.js'}"></script>
+        <!-- Chart.js -->
+        <script th:src= "${'/vendors/Chart.js/dist/Chart.min.js'}"></script>
+        <!-- gauge.js -->
+        <script th:src= "${'/vendors/gauge.js/dist/gauge.min.js'}"></script>
+        <!-- bootstrap-progressbar -->
+        <script th:src= "${'/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'}"></script>
+        <!-- iCheck -->
+        <script th:src= "${'/vendors/iCheck/icheck.min.js'}"></script>
+        <!-- Skycons -->
+        <script th:src= "${'/vendors/skycons/skycons.js'}"></script>
+        <!-- Flot -->
+        <script th:src= "${'/vendors/Flot/jquery.flot.js'}"></script>
+        <script th:src= "${'/vendors/Flot/jquery.flot.pie.js'}"></script>
+        <script th:src= "${'/vendors/Flot/jquery.flot.time.js'}"></script>
+        <script th:src= "${'/vendors/Flot/jquery.flot.stack.js'}"></script>
+        <script th:src= "${'/vendors/Flot/jquery.flot.resize.js'}"></script>
+        <!-- Flot plugins -->
+        <script th:src= "${'/vendors/flot.orderbars/js/jquery.flot.orderBars.js'}"></script>
+        <script th:src= "${'/vendors/flot-spline/js/jquery.flot.spline.min.js'}"></script>
+        <script th:src= "${'/vendors/flot.curvedlines/curvedLines.js'}"></script>
+        <!-- DateJS -->
+        <script th:src= "${'/vendors/DateJS/build/date.js'}"></script>
+        <!-- JQVMap -->
+        <script th:src= "${'/vendors/jqvmap/dist/jquery.vmap.js'}"></script>
+        <script th:src= "${'/vendors/jqvmap/dist/maps/jquery.vmap.world.js'}"></script>
+        <script th:src= "${'/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'}"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script th:src= "${'/vendors/moment/min/moment.min.js'}"></script>
+        <script th:src= "${'/vendors/bootstrap-daterangepicker/daterangepicker.js'}"></script>
+        <!-- Custom Theme Scripts -->
+        <script th:src= "${'/build/js/custom.min.js'}"></script>
+
+        <!-- layer -->
+        <script th:src="@{https://cdn.bootcss.com/layer/2.1/layer.js}" type="text/javascript"></script>
       </head>
 
-      <body>
-            <div id="wrapper">
-            <!--header-->
-            <div th:replace="fragments/header :: header"></div>
+      <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
 
+<!--                    siderBar-->
+                    <div th:replace="fragments/sideBar"></div>
+
+<!--                    header-->
+                    <div th:replace="fragments/header"></div>
+
+<!--                    bodycontent-->
+                <div class="right_col" role="main">
+                    <div th:if="${template}">
+                        <div th:replace="${template}"/>
+                    </div>
+                </div>
+
+<!--                        footer-->
+                    <div th:replace="fragments/footer"></div>
+
+            </div>
+        </div>
+<!--        <div id="wrapper">-->
+            <!--header-->
+<!--            <div th:replace="fragments/header :: header"></div>-->
             <!-- body-->
-            <div class='mainBody' style="margin-top: 20px;">
-               <div th:if="${template}">
-                  <div th:replace="${template}"/>
-               </div>
-            </div>
-            <!-- footer-->
-            <div th:replace="fragments/footer :: footer"></div>
-            </div>
-       </body>
+<!--            <div class='mainBody' style="margin-top: 20px;">-->
+<!--           <div th:if="${template}">-->
+<!--              <div th:replace="${template}"/>-->
+<!--           </div>-->
+<!--        </div>-->
+        <!-- footer-->
+<!--        <div th:replace="fragments/footer :: footer"></div>-->
+<!--        </div>-->
+      </body>
 </html>

@@ -1,4 +1,4 @@
-<section>
+<div class="right_col" role="main">
     hello big face！<br>
 
     <h3>file download</h3>
@@ -25,6 +25,7 @@
 
 <!--    <a th:href="@{http://www.baidu.com}" target="_blank"></a>-->
 <!--    <a th:href="${baiduUrl}" target="_blank"></a>-->
+<!--    <link th:href="${'相对路径'}" rel="stylesheet"/>-->
 
 <!--    封装动态url、url查询参数-->
     <a th:href="@{'/test/index'+${city.id}}" th:text="${city.cityName}"></a>
@@ -64,4 +65,4 @@
         <button type="submit">Submit Info</button>
     </form>
 
-</section>
+</div>

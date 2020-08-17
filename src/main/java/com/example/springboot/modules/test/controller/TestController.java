@@ -120,7 +120,6 @@ public class TestController {
         return "redirect:/test/index";
     }
 
-
     /*
      * 127.0.0.1:8086/test/index
      * */
