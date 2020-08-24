@@ -51,7 +51,7 @@
          data:JSON.stringify(user),
          success:function (data) {
              if(data.status==200){
-                 // location.href="/index";
+                 location.href = "/common/dashboard";
              }else {
                  layer.msg(data.message,{icon:0});
              }

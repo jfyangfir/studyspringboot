@@ -1,6 +1,6 @@
 <div>
     <div class="login_wrapper">
-        <div id="login" class="animate form">
+        <div class="animate form">
             <section class="login_content">
                 <form>
                     <h1>登录</h1>
@@ -11,7 +11,7 @@
                         <input  name="password" type="password" class="form-control" placeholder="Password" required=""/>
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="/index">登录</a>
+                        <a class="btn btn-default submit" href="javascript:void(0);" id="login">登录</a>
                         <a class="reset_pass" href="#">忘记密码</a>
                     </div>
 
@@ -35,3 +35,33 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#login").bind("click",function () {
+            login();
+        })
+    });
+    function login() {
+    var user={};
+    user.userName=$("[name='userName']").val();
+    user.password=$("[name='password']").val();
+    // user.rememberMe=$("[name='rememberMe']").prop('checked');
+    $.ajax({
+        url : "/api/login",
+        type : "post",
+        contentType: "application/json",
+        data : JSON.stringify(user),
+        success : function (data) {
+        if (data.status == 200) {
+            // layer.msg(data.message,{icon:0});
+            location.href = "/common/dashboard";
+        }else {
+            layer.msg(data.message,{icon: 0});
+          }
+        },
+        error:function (data) {
+            layer.msg(data.responseText,{icon:0});
+        }
+    })
+}
+</script>

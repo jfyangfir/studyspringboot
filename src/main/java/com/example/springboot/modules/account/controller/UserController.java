@@ -20,4 +20,8 @@ public class UserController {
     public Result<User> insertUser(@RequestBody User user){
         return userService.insertUser(user);
     }
+    @PostMapping(value="/login",consumes = "application/json")
+    public Result<User> selectUser(@RequestBody User user){
+        return userService.selectUser(user);
+    }
 }

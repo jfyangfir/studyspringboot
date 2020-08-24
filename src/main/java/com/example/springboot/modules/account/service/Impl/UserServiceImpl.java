@@ -33,6 +33,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public Result<User> selectUser(User user) {
+
+        User userTemp=getUserByUserName(user.getUserName());
+        if(userTemp!=null){
+            return new Result<User>(Result.ResultStatus.SUCCESS.status,"User name is existed");
+        }else {
+            return new Result<User>(Result.ResultStatus.FAIL.status,"User name is not existed");
+        }
+
+    }
+
+    @Override
     public User getUserByUserName(String userName) {
         return userDao.getUserByUserName(userName);
     }
