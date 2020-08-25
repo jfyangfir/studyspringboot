@@ -16,4 +16,9 @@ public class AccountController {
     public String registerPage(){
         return "indexSimple";
     }
+
+    @RequestMapping("/users")
+    public String usersPage(){
+        return "index";
+    }
 }
