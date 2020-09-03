@@ -51,16 +51,16 @@ public class TestController {
 
     @RequestMapping("/download")
     @ResponseBody //返回一个对象而不是一个页面用此注解
-    public ResponseEntity<Resource> download(@RequestParam String fileName){
+    public ResponseEntity<Resource> download(@RequestParam String fileName) {
 
         try {
-            String resourcePath=resourceConfigBean.getResourcePath()+fileName;
-            Resource resource=new UrlResource(ResourceUtils.getURL(resourcePath));
+            String resourcePath = resourceConfigBean.getResourcePath() + fileName;
+            Resource resource = new UrlResource(ResourceUtils.getURL(resourcePath));
             //CONTENT_DISPOSITION 设置下载文件的内容描述，可省略
             return ResponseEntity.ok()
-                            .header(HttpHeaders.CONTENT_TYPE,"application/octet-stream")
-                            .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=%s",fileName))
-                            .body(resource);
+                    .header(HttpHeaders.CONTENT_TYPE, "application/octet-stream")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=%s", fileName))
+                    .body(resource);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -68,55 +68,55 @@ public class TestController {
         return null;
     }
 
-//    上传多个文件
-    @PostMapping(value = "/files",consumes = "multipart/form-data")
-    public String uploadFiles(MultipartFile[] files,RedirectAttributes redirectAttributes){
-        boolean isEmpty=true;
-        for(MultipartFile file:files){
-            if(file.isEmpty()){
+    //    上传多个文件
+    @PostMapping(value = "/files", consumes = "multipart/form-data")
+    public String uploadFiles(MultipartFile[] files, RedirectAttributes redirectAttributes) {
+        boolean isEmpty = true;
+        for (MultipartFile file : files) {
+            if (file.isEmpty()) {
                 continue;
             }
             try {
-                String destFilePath="D:\\upload\\"+file.getOriginalFilename();
-                File destFile=new File(destFilePath);
+                String destFilePath = "D:\\upload\\" + file.getOriginalFilename();
+                File destFile = new File(destFilePath);
                 file.transferTo(destFile);
 
-                isEmpty=false;
+                isEmpty = false;
             } catch (IOException e) {
                 e.printStackTrace();
-                redirectAttributes.addFlashAttribute("message","Upload failed");
+                redirectAttributes.addFlashAttribute("message", "Upload failed");
                 return "redirect:/test/index";
             }
         }
-        if(isEmpty){
-            redirectAttributes.addFlashAttribute("message","Please select file");
-        }else{
-            redirectAttributes.addFlashAttribute("message","Upload success.");
+        if (isEmpty) {
+            redirectAttributes.addFlashAttribute("message", "Please select file");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Upload success.");
         }
         return "redirect:/test/index";
     }
 
-//    上传单个文件
-    @PostMapping(value = "/file",consumes = "multipart/form-data")
-    public String uploadFile(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes){
+    //    上传单个文件
+    @PostMapping(value = "/file", consumes = "multipart/form-data")
+    public String uploadFile(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
 
-        if(file.isEmpty()){
+        if (file.isEmpty()) {
 
 //            addFlashAttribute()自动的将传递参数封装到后续的ModelMap
-            redirectAttributes.addFlashAttribute("message","Please select file");
+            redirectAttributes.addFlashAttribute("message", "Please select file");
             return "redirect:/test/index";
         }
 
-        String resourcePath=resourceConfigBean.getResourcePath()+file.getOriginalFilename();
+        String resourcePath = resourceConfigBean.getResourcePath() + file.getOriginalFilename();
         try {
-            File destFile=new File(ResourceUtils.getURL(resourcePath).getPath());
+            File destFile = new File(ResourceUtils.getURL(resourcePath).getPath());
             file.transferTo(destFile);
         } catch (IOException e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message","Upload failed");
+            redirectAttributes.addFlashAttribute("message", "Upload failed");
             return "redirect:/test/index";
         }
-        redirectAttributes.addFlashAttribute("message","Upload success.");
+        redirectAttributes.addFlashAttribute("message", "Upload success.");
         return "redirect:/test/index";
     }
 
@@ -124,16 +124,15 @@ public class TestController {
      * 127.0.0.1:8086/test/index
      * */
     @RequestMapping("/index")
-    public String indexPage(ModelMap modelMap){
-        int countryId=3;
-        List<City> cities=cityService.getCitiesByCountryId(countryId);
+    public String indexPage(ModelMap modelMap) {
+        int countryId = 3;
+        List<City> cities = cityService.getCitiesByCountryId(countryId);
 //        modelMap.addAttribute("template","test/index");
-        modelMap.addAttribute("city",cities.get(0));
-        modelMap.addAttribute("cities",cities);
-        modelMap.addAttribute("updateCityUrl","/api/cityUpdate");
+        modelMap.addAttribute("city", cities.get(0));
+        modelMap.addAttribute("cities", cities);
+        modelMap.addAttribute("updateCityUrl", "/api/cityUpdate");
         return "index";
     }
-
 
 
 //    @RequestMapping("/test/config")
@@ -154,20 +153,21 @@ public class TestController {
 //        return sb.toString();
 //    }
 
-    /** 1.项目启动时，ParameterFilter init.;
-      * 2.执行控制器代码后，ParameterFilter doFilter.==>Interceptor PreHandle()==>Around Controller==>
-      *   Before Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion();
-      * 3.filter 里的 destroy 方法在容器移除 servlet 时执行，同样只执行一次。这个方法会在所有的线程的 service() 方法执行完成或者超时后执行，
-      *   调用这个方法后，容器不再把请求发送给这个servlet。这个方法给servlet释放占用的资源的机会，通常用来执行一些清理任务
-      */
+    /**
+     * 1.项目启动时，ParameterFilter init.;
+     * 2.ParameterFilter doFilter.==>Interceptor PreHandle()==>Around Controller==>
+     * Before Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion();
+     * 3.filter 里的 destroy 方法在容器移除 servlet 时执行，同样只执行一次。这个方法会在所有的线程的 service() 方法执行完成或者超时后执行，
+     * 调用这个方法后，容器不再把请求发送给这个servlet。这个方法给servlet释放占用的资源的机会，通常用来执行一些清理任务
+     */
 
-/*
- * 127.0.0.1:8086/test/desc?key=fuck
- * */
+    /*
+     * 127.0.0.1:8086/test/desc?key=fuck
+     * */
     @RequestMapping("/desc")
     @ResponseBody
-    public String testDesc(HttpServletRequest request, @RequestParam String key){
-        String keyTwo=request.getParameter("key");
-        return "it is test module desc"+"---"+key+"======"+keyTwo;
+    public String testDesc(HttpServletRequest request, @RequestParam String key) {
+        String keyTwo = request.getParameter("key");
+        return "it is test module desc" + "---" + key + "======" + keyTwo;
     }
 }

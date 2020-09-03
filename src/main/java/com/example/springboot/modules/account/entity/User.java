@@ -7,10 +7,11 @@ import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
 //自动生成表 映射到数据库中
 //@Entity 表明该类是个实体类   @Table 指定数据库表名
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
     //@Id 主键标识
@@ -20,7 +21,7 @@ public class User {
     private int userId;
     private String userName;
     private String password;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
     //@Transient 在不需要序列化的属性前添加关键字

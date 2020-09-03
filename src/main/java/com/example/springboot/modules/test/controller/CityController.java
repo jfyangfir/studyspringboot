@@ -17,57 +17,57 @@ public class CityController {
     private CityService cityService;
 
     /*
-    * 127.0.0.1:8086/api/cities/1
-    * */
+     * 127.0.0.1:8086/api/cities/1
+     * */
     @RequestMapping("/cities/{id}")
 //    @PathVariable找路径上面对应的参数
-    public List<City> getCitiesById(@PathVariable int id){
-          return cityService.getCitiesById(id);
+    public List<City> getCitiesById(@PathVariable int id) {
+        return cityService.getCitiesById(id);
     }
 
     /*
      * 127.0.0.1:8086/api/city?cityName=
      * */
     @RequestMapping("/city")
-  /** @PathVariable   找路径上面对应的参数
-    * @RequestParam   将请求参数绑定到你控制器的方法参数上
-    * @RequestBody    接受 jason 数据
-    * @PostMapping    指定 post 请求
-    * consumes        进入控制器的数据类型
-    */
-    public City getCityByCityName(@RequestParam String cityName){
-          return cityService.getCityByCityName(cityName);
+    /** @PathVariable 找路径上面对应的参数
+     * @RequestParam 将请求参数绑定到你控制器的方法参数上
+     * @RequestBody 接受 jason 数据
+     * @PostMapping 指定 post 请求
+     * consumes        进入控制器的数据类型
+     */
+    public City getCityByCityName(@RequestParam String cityName) {
+        return cityService.getCityByCityName(cityName);
     }
 
     /*
      * 127.0.0.1:8086/api/cities?currentPage=1&pageSize=4&id=1
      * */
     @RequestMapping("/cities")
-    public PageInfo<City> getCitiesByPage(@RequestParam int currentPage, @RequestParam int pageSize,@RequestParam int id){
-        return cityService.getCitiesByPage(currentPage,pageSize,id);
+    public PageInfo<City> getCitiesByPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam int id) {
+        return cityService.getCitiesByPage(currentPage, pageSize, id);
     }
 
     /*
      * 127.0.0.1:8086/api/city
      * */
-    @PostMapping(value="/city",consumes = "application/json")
-    public Result<City> insertCity(@RequestBody City city){
+    @PostMapping(value = "/city", consumes = "application/json")
+    public Result<City> insertCity(@RequestBody City city) {
         return cityService.insertCity(city);
     }
 
     /*
      * 127.0.0.1:8086/api/cityUpdate
      * */
-    @PutMapping(value="/cityUpdate",consumes = "application/x-www-form-urlencoded")
-    public Result<City> updateCity(@ModelAttribute City city){
+    @PutMapping(value = "/cityUpdate", consumes = "application/x-www-form-urlencoded")
+    public Result<City> updateCity(@ModelAttribute City city) {
         return cityService.updateCity(city);
     }
 
     /*
      * 127.0.0.1:8086/api/cityDelete/7
      * */
-    @DeleteMapping(value="/cityDelete/{id}")
-    public Result<Object> deleteCity(@PathVariable int id){
+    @DeleteMapping(value = "/cityDelete/{id}")
+    public Result<Object> deleteCity(@PathVariable int id) {
         return cityService.deleteCity(id);
     }
 
@@ -75,7 +75,7 @@ public class CityController {
      * 127.0.0.1:8086/api/redis/cities/4
      * */
     @RequestMapping("/redis/cities/{id}")
-    public Object migrateCitiesById(@PathVariable int id){
+    public Object migrateCitiesById(@PathVariable int id) {
         return cityService.migrateCitiesById(id);
     }
 
@@ -83,7 +83,7 @@ public class CityController {
      * 127.0.0.1:8086/api/citiesCountryId/3
      * */
     @RequestMapping("/citiesCountryId/{countryId}")
-    public List<City> getCitiesByCountryId(@PathVariable int countryId){
+    public List<City> getCitiesByCountryId(@PathVariable int countryId) {
         return cityService.getCitiesByCountryId(countryId);
     }
 }

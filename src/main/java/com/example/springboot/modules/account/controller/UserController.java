@@ -14,16 +14,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value="/user",consumes = "application/json")
-    public Result<User> insertUser(@RequestBody User user){
+    @PostMapping(value = "/user", consumes = "application/json")
+    public Result<User> insertUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
-    @PostMapping(value="/login",consumes = "application/json")
-    public Result<User> selectUser(@RequestBody User user){
+
+    @PostMapping(value = "/login", consumes = "application/json")
+    public Result<User> selectUser(@RequestBody User user) {
         return userService.selectUser(user);
     }
-    @PostMapping(value="/getUsers",consumes = "application/json")
-    public PageInfo<User> getUsersByPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam String userName){
-        return userService.getUsersByPage(currentPage,pageSize,userName);
+
+    @PostMapping(value = "/getUsers", consumes = "application/json")
+    public PageInfo<User> getUsersByPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam String userName) {
+        return userService.getUsersByPage(currentPage, pageSize, userName);
     }
 }

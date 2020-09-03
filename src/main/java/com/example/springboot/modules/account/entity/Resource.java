@@ -3,7 +3,7 @@ package com.example.springboot.modules.account.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="resource")
+@Table(name = "resource")
 public class Resource {
 
     @Id

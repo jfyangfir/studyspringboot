@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/common")
 public class CommonController {
 
-        @RequestMapping("/dashboard")
-        public String dashboardPage(){
-              return "index";
-}
+    @RequestMapping("/dashboard")
+    public String dashboardPage() {
+        return "index";
+    }
 
 }

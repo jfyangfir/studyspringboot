@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Result<User> insertUser(User user) {
 
-        User userTemp=getUserByUserName(user.getUserName());
-        if(userTemp!=null){
-            return new Result<User>(Result.ResultStatus.FAIL.status,"User name is repeat!");
+        User userTemp = getUserByUserName(user.getUserName());
+        if (userTemp != null) {
+            return new Result<User>(Result.ResultStatus.FAIL.status, "User name is repeat!");
         }
 
         user.setCreateDate(new Date());
@@ -35,18 +35,18 @@ public class UserServiceImpl implements UserService {
         user.setPassword(MD5Util.getMD5(user.getPassword()));
 
         userDao.insertUser(user);
-        return new Result<User>(Result.ResultStatus.SUCCESS.status,"Insert success",user);
+        return new Result<User>(Result.ResultStatus.SUCCESS.status, "Insert success", user);
     }
 
     @Override
     @Transactional
     public Result<User> selectUser(User user) {
 
-        User userTemp=getUserByUserName(user.getUserName());
-        if(userTemp!=null){
-            return new Result<User>(Result.ResultStatus.SUCCESS.status,"User name is existed");
-        }else {
-            return new Result<User>(Result.ResultStatus.FAIL.status,"User name is not existed");
+        User userTemp = getUserByUserName(user.getUserName());
+        if (userTemp != null) {
+            return new Result<User>(Result.ResultStatus.SUCCESS.status, "User name is existed");
+        } else {
+            return new Result<User>(Result.ResultStatus.FAIL.status, "User name is not existed");
         }
 
     }
@@ -54,9 +54,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfo<User> getUsersByPage(int currentPage, int pageSize, String userName) {
         //pagehelper 插件使用
-            PageHelper.startPage(currentPage,pageSize);
-            return new PageInfo<>(Optional.ofNullable(userDao.getUsersByPage(userName))
-                    .orElse(Collections.emptyList()));
+        PageHelper.startPage(currentPage, pageSize);
+        return new PageInfo<>(Optional.ofNullable(userDao.getUsersByPage(userName))
+                .orElse(Collections.emptyList()));
     }
 
     @Override

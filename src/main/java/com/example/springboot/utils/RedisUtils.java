@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisUtils {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(RedisUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisUtils.class);
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     /*
-    * 写入缓存
-    * */
-    public Object set(String key,Object value){
+     * 写入缓存
+     * */
+    public Object set(String key, Object value) {
         try {
-            redisTemplate.opsForValue().set(key,value);
+            redisTemplate.opsForValue().set(key, value);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             LOGGER.debug(e.getMessage());
             return false;
         }
@@ -30,7 +30,7 @@ public class RedisUtils {
     /*
      * 读取缓存
      * */
-    public Object get(String key){
-        return StringUtils.isBlank(key)? null:redisTemplate.opsForValue().get(key);
+    public Object get(String key) {
+        return StringUtils.isBlank(key) ? null : redisTemplate.opsForValue().get(key);
     }
 }

@@ -4,8 +4,9 @@ package com.example.springboot.modules.account.entity;
 import javax.annotation.Resource;
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
-@Table(name="role")
+@Table(name = "role")
 public class Role {
 
     @Id

@@ -12,7 +12,7 @@ public class City {
     private String person;
     private String countryId;
     private List<Country> countries;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCreated;
 

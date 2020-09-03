@@ -3,6 +3,7 @@ package com.example.springboot.modules.test.dao;
 import com.example.springboot.modules.test.entity.Country;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
 @Mapper
 public interface CountryDao {
 

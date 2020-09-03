@@ -17,9 +17,9 @@ public class CountryController {
      * */
     @RequestMapping("/country/{countryId}")
     /** @PathVariable 找路径上面对应的参数
-      * @RequestParam 将请求参数绑定到你控制器的方法参数上
-      */
-    public Country getCountryByCountryId(@PathVariable int countryId){
+     * @RequestParam 将请求参数绑定到你控制器的方法参数上
+     */
+    public Country getCountryByCountryId(@PathVariable int countryId) {
         return countryService.getCountryByCountryId(countryId);
     }
 }

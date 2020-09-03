@@ -13,7 +13,7 @@ public class SpringBootDemoApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(SpringBootDemoApplication. class);
+        return builder.sources(SpringBootDemoApplication.class);
     }
 
 

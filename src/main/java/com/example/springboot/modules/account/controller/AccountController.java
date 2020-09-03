@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AccountController {
 
     @RequestMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "indexSimple";
     }
 
     @RequestMapping("/register")
-    public String registerPage(){
+    public String registerPage() {
         return "indexSimple";
     }
 
     @RequestMapping("/users")
-    public String usersPage(){
+    public String usersPage() {
         return "index";
     }
 }
