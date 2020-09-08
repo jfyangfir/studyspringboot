@@ -2,7 +2,7 @@ package com.example.springboot.modules.common.vo;
 
 public class Result<T> {
 
-    //    private final static Integer SUCCESS=200;
+//    private final static Integer SUCCESS=200;
 //    private final static Integer Fail=500;
 //    status 状态
     private int status;
@@ -63,7 +63,7 @@ public class Result<T> {
 
         public int status;
 
-        private ResultStatus(int status) {
+        ResultStatus(int status) {
             this.status = status;
         }
     }
