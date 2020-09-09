@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 20/08/2020 16:09:24
+ Date: 09/09/2020 08:47:14
 */
 
 SET NAMES utf8mb4;
@@ -41,6 +41,7 @@ INSERT INTO `city` VALUES (3, 'Yanting', 'lvmo', 3, '2020-07-27 14:26:19');
 INSERT INTO `city` VALUES (4, 'Jiangyou', 'Wei', 4, '2020-07-27 18:26:24');
 INSERT INTO `city` VALUES (5, 'Guangan', 'Du', 3, '2020-07-28 08:26:31');
 INSERT INTO `city` VALUES (6, 'Tashui', 'Hu', 3, '2020-07-28 11:26:38');
+INSERT INTO `city` VALUES (7, 'Santai', 'Ling', 4, '2020-09-04 16:23:20');
 
 -- ----------------------------
 -- Table structure for country
@@ -91,11 +92,12 @@ CREATE TABLE `user`  (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '2020-08-14 08:48:46', '1795fe591487b46e9a5225c9d3d21e92', 'admin');
+INSERT INTO `user` VALUES (3, '2020-08-24 03:02:34', '1795fe591487b46e9a5225c9d3d21e92', 'yjf');
 
 SET FOREIGN_KEY_CHECKS = 1;
