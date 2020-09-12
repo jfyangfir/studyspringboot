@@ -14,11 +14,14 @@ public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    /*资源授权*/
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         return null;
     }
 
+    /*身份验证*/
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String userName= (String) authenticationToken.getPrincipal();
