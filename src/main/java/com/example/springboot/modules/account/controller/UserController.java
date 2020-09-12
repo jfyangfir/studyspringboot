@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping(value = "/login", consumes = "application/json")
     public Result<User> selectUser(@RequestBody User user) {
-        return userService.selectUser(user);
+        return userService.login(user);
     }
 
     @PostMapping(value = "/getUsers", consumes = "application/json")

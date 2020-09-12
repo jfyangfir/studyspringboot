@@ -62,7 +62,7 @@ public class User {
         this.createDate = createDate;
     }
 
-    public boolean isRememberMe() {
+    public boolean getRememberMe() {
         return rememberMe;
     }
 

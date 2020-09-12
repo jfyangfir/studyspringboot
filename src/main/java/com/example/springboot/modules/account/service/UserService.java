@@ -13,4 +13,6 @@ public interface UserService {
     Result<User> selectUser(User user);
 
     PageInfo<User> getUsersByPage(int currentPage, int pageSize, String userName);
+
+    Result<User> login(User user);
 }

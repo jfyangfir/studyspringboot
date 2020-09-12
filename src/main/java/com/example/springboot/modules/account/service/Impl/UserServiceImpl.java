@@ -7,6 +7,9 @@ import com.example.springboot.modules.common.vo.Result;
 import com.example.springboot.utils.MD5Util;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +60,23 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(currentPage, pageSize);
         return new PageInfo<>(Optional.ofNullable(userDao.getUsersByPage(userName))
                 .orElse(Collections.emptyList()));
+    }
+
+    @Override
+    public Result<User> login(User user) {
+
+        try{
+            Subject subject= SecurityUtils.getSubject();
+            UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(user.getUserName(),MD5Util.getMD5(user.getPassword()));
+            usernamePasswordToken.setRememberMe(user.getRememberMe());
+            subject.login(usernamePasswordToken);
+            subject.checkRoles();
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result<User>(Result.ResultStatus.FAIL.status,"login fail");
+        }
+
+        return new Result<User>(Result.ResultStatus.SUCCESS.status,"Login success.",user);
     }
 
     @Override

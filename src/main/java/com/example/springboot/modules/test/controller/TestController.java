@@ -155,8 +155,8 @@ public class TestController {
 
     /**
      * 1.项目启动时，ParameterFilter init.;
-     * 2.ParameterFilter doFilter.==>Interceptor PreHandle()==>Around Controller==>
-     * Before Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion();
+     * 2.ParameterFilter doFilter.==>Interceptor PreHandle()==>Before Controller==>Controller running==>
+     * Around Controller==>After Controller==>Interceptor PostHandle()==>Interceptor AfterCompletion()
      * 3.filter 里的 destroy 方法在容器移除 servlet 时执行，同样只执行一次。这个方法会在所有的线程的 service() 方法执行完成或者超时后执行，
      * 调用这个方法后，容器不再把请求发送给这个servlet。这个方法给servlet释放占用的资源的机会，通常用来执行一些清理任务
      */
