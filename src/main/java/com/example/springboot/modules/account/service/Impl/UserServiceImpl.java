@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService {
                 .orElse(Collections.emptyList()));
     }
 
+    /*登录*/
     @Override
     public Result<User> login(User user) {
 
@@ -77,6 +78,13 @@ public class UserServiceImpl implements UserService {
         }
 
         return new Result<User>(Result.ResultStatus.SUCCESS.status,"Login success.",user);
+    }
+
+    /*退出登录*/
+    @Override
+    public void logout() {
+        Subject subject= SecurityUtils.getSubject();
+        subject.logout();
     }
 
     @Override

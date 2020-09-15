@@ -1,4 +1,4 @@
-<div class="col-md-3 left_col">
+<div class="col-md-3 left_col" xmlns:shiro="http://www.w3.org/1999/xhtml">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
             <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
@@ -25,16 +25,17 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a href="/common/dashboard">
+                    <li shiro:hasAnyRoles="admin,staff">
+                    <a href="/common/dashboard">
                         <i class="fa fa-home"></i> Home
                     </a>
+                    </li>
+                    <li>
                         <ul class="nav child_menu">
-                            <li><a href="/account/users">Dashboard</a></li>
-                            <li><a href="index2.html">Dashboard2</a></li>
-                            <li><a href="index3.html">Dashboard3</a></li>
+                            <li shiro:hasAnyRoles="admin"><a href="/account/users">Dashboard</a></li>
                         </ul>
                     </li>
-                    <li><a href="/test/index">
+                    <li shiro:hasAnyRoles="staff"><a href="/test/index">
                         <i class="fa fa-dashboard"></i> Test
                     </a>
                     </li>

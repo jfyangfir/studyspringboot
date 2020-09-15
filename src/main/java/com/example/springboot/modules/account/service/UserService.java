@@ -15,4 +15,6 @@ public interface UserService {
     PageInfo<User> getUsersByPage(int currentPage, int pageSize, String userName);
 
     Result<User> login(User user);
+
+    void logout();
 }

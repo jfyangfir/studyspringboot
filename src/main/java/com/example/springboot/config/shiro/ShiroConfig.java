@@ -53,19 +53,19 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/account/login");
         shiroFilterFactoryBean.setSuccessUrl("/common/dashboard");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
-//        Map<String,String> map = new LinkedHashMap<String,String>();
-//        map.put(" /static/**","anon");
-//        map.put("js/**","anon");
-//        map.put("/css/**","anon");
-//        map.put("/account/login","anon");
-//        map.put("/account/doLogin","anon");
-//        map.put("/account/register","anon");
-//        map.put( "/account/doRegister","anon");
-//        map.put("/test/**","anon");
-         //如果使用"记住我功能”，则采用user规则，如果必须要用户登录，则采用authc规则
-//         map.put("/**","user");
-//         map.put("/pay/**","authc");
-//         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+
+        Map<String,String> map = new LinkedHashMap<String,String>();
+        map.put(" /static/**","anon");
+        map.put("/build/**","anon");
+        map.put("/vendors/**","anon");
+        map.put("/account/login","anon");
+        map.put("/api/login","anon");
+        map.put("/account/register","anon");
+        map.put( "/api/user","anon");
+        map.put("/test/**","anon");
+//         如果使用"记住我功能”，则采用user规则，如果必须要用户登录，则采用authc规则
+         map.put("/**","authc");
+         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
          return shiroFilterFactoryBean;
     }
 
@@ -87,7 +87,6 @@ public class ShiroConfig {
         advisorAutoProxyCreator.setProxyTargetClass(true);
         return advisorAutoProxyCreator;
     }
-
 
     /**
      * --开启Shiro的注解
