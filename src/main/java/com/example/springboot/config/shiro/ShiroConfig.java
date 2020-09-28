@@ -24,6 +24,21 @@ public class ShiroConfig {
     @Autowired
     private MyRealm myRealm;
 
+    /**注解:
+      *@RequiresAuthentication : 表示当前subject需要登录；
+      *@RequiresUser : 表示当前subject需要登录或记住我；
+      *@RequiresGuest : 表示当前subject是游客身份；
+      *@RequiresRoles(value={"admin","user"},logical=Logical.AND) : 当前subject需要的角色；
+      *@RequiresPermissions(value={"***"，"***"},logical=Logical.OR) : 当前subject需要拥有的资源；
+      *
+      *标签:
+      *shiro:guest: 游客访问:
+      *shiro:user: 用户需要登录或记住我:
+      *shiro:authenticated: 用户需要登录:
+      *shiro:hasRole: 用户需要某角色:
+      *shiro:hasAnyRoles: 用户需要某些角色:
+      *shiro:hasPermission: 用户需要某权限:*/
+
     @Bean
     public DefaultSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -32,7 +47,7 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    /**配置shiro过滤器工厂
+    /**配置 shiro 过滤器工厂
       *拦截权限
       *anon:匿名访问，无需登录
       *authc:登录后才能访问
@@ -120,7 +135,7 @@ public class ShiroConfig {
     public CookieRememberMeManager rememberMeManager(){
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookieo());
-        byte[] cipherKey = Base64.decode("wGiHplamyXlVB11UXWo18g--");
+        byte[] cipherKey = Base64.decode("wGiHplamyXlVB11UXWol8g==");
         cookieRememberMeManager.setCipherService(new AesCipherService());
         cookieRememberMeManager.setCipherKey(cipherKey);
         return cookieRememberMeManager;

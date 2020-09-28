@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,14 @@ public class UserServiceImpl implements UserService {
             usernamePasswordToken.setRememberMe(user.getRememberMe());
             subject.login(usernamePasswordToken);
             subject.checkRoles();
+
+            //1.获取session
+            Session session=subject.getSession();
+            //2.获取user对象
+            User userTemp= (User) subject.getPrincipal();
+            //3.封装user对象到session中
+            session.setAttribute("userId",userTemp.getUserId());
+
         }catch (Exception e){
             e.printStackTrace();
             return new Result<User>(Result.ResultStatus.FAIL.status,"login fail");

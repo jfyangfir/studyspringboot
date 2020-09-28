@@ -33,8 +33,10 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
 
-        String userName= (String) principalCollection.getPrimaryPrincipal();
-        User user=userService.getUserByUserName(userName);
+//        String userName= (String) principalCollection.getPrimaryPrincipal();
+//        User user=userService.getUserByUserName(userName);
+        //Primary Principal  主要负责人
+        User user= (User) principalCollection.getPrimaryPrincipal();
         if(user==null){
             throw new UnknownAccountException("This user is not exist.");
         }
@@ -62,7 +64,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new UnknownAccountException("This user name do not exist.");
         }
         //身份验证器，包装用户名和密码
-        return new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(),getName());
+        return new SimpleAuthenticationInfo(user, user.getPassword(),getName());
     }
 
 }
